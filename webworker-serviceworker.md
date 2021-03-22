@@ -6,7 +6,7 @@ description: 2021.03.27 스터디 내용
 
 ## Web Worker란?
 
- 웹 워커는 스크립트 연산을 웹 어플리케이션의 주 실행 스레드와 분리된 별도의 백그라운드 스레드에서 실행할 수 있는 기술. 웹 워커를 통해 무거운 작업을 분리된 스레드에서 처리하면, 주 스레드가 멈추거나 느려지지 않고 동작할 수 있다. [링크](https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API)
+ 웹 워커는 스크립트 연산을 웹 어플리케이션의 주 실행 스레드와 분리된 별도의 백그라운드 스레드에서 실행할 수 있는 기술. 웹 워커를 통해 무거운 작업을 분리된 스레드에서 처리하면, 주 스레드가 멈추거나 느려지지 않고 동작할 수 있다.  [WebWorker](https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API) [ServiceWorker](https://developers.google.com/web/fundamentals/primers/service-workers) 
 
 ## Web Worker의 단점
 
