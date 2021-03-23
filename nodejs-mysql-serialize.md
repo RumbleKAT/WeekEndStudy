@@ -31,7 +31,25 @@ mysql> select * from users;
 1 row in set (0.00 sec)
 ```
 
-## Node JS 패키지 초기화
+## Node JS 
+
+Nodejs 는 이벤트 기반의 플랫폼. 노드에서 일어나는 모든 일은 어떤 이벤트에 대한 반응. 모두 일련의 콜백이다. libuv라는 추상화된 라이브러리가 이벤트 루프 기능을 제공. 자바스크립트를 실행하는 스레드는 단 하나, 이 스레드가 바로 이벤트 루프가 실행되는 스레드. 
+
+### 모든 CPU 활용 <a id="&#xBAA8;&#xB4E0;-CPU-&#xD65C;&#xC6A9;"></a>
+
+Node.js 어플리케이션은 싱글 스레드로 작동합니다. 멀티코어 환경에서 1개의 Node.js 어플리케이션은 효율적으로 작동하지 않습니다. 낭비되는 CPU가 있기 때문입니다. [Cluster Module](https://nodejs.org/api/cluster.html)을 사용하면, CPU 마다 child 프로세스를 쉽게 만들 수 있습니다. 각각의 child 프로세스는 각자 자신만의 이벤트루프가 존재하고 master 프로세스는 모든 자식들에게 요청을 분산시켜 줍니다.
+
+### 스레드 풀 조정 <a id="&#xC2A4;&#xB808;&#xB4DC;-&#xD480;-&#xC870;&#xC815;"></a>
+
+앞서 언급했듯이, libuv는 스레드 4개로 스레드 풀을 생성합니다. 스레드 풀의 기본 크기는 `UV_THREADPOOL_SIZE` 환경변수를 설정해서 수정할 수 있습니다. 이 방법은 I/O 작업이 많은 어플리케이션에서 도움이 될 수 있겠지만, 큰 스레드 풀은 메모리나 CPU를 고갈시킬 수 있음을 기억해야 합니다.
+
+### 작업을 다른서비스에 맡기기 <a id="&#xC791;&#xC5C5;&#xC744;-&#xB2E4;&#xB978;&#xC11C;&#xBE44;&#xC2A4;&#xC5D0;-&#xB9E1;&#xAE30;&#xAE30;"></a>
+
+만약 Node.js가 CPU사용이 과도하게 필요한 작업에서 사용된다면, 이 특정 작업에 더 잘맞는 다른 언어를 선택해서 그 쪽으로 처리를 옮겨 작업량을 줄이는 것이 가능한 방법일 수 있습니다.
+
+
+
+
 
 `package.json`은 프로젝트 정보와 의존성\(dependencies\)을 관리하는 문서  
 이미 작성된 `package.json` 문서는 어느 곳에서도 동일한 개발 환경을 구축할 수 있게 해준다.  
@@ -236,6 +254,16 @@ Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 �
    * req\(요청\)/ res\(응답\) 
 
 ```javascript
+module.exports = {
+    host : 'localhost',
+    user : 'root',
+    port : 3306,
+    password : 'Init123$',
+    database : 'my_db'
+}
+```
+
+```javascript
 const mysql = require("mysql2");
 const express = require('express');
 const dbconfig = require('./config/database');
@@ -264,5 +292,5 @@ app.listen(port, () => {
 });
 ```
 
-
+![](.gitbook/assets/2021-03-23-11.03.25.png)
 
