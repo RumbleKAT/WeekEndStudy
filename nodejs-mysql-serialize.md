@@ -224,5 +224,32 @@ app.use(async (ctx, next) => {
 });
 ```
 
+## Express
+
+Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 기능을 제공하는 간결하고 유연한 Node.js 웹 애플리케이션 프레임워크. 
+
+1. require는 nodeJS에서 다른 패키지를 불러올 때 사용되는 키워드. NODE\_PATH 환경 변수에 설정한 위치에서 express라는 모듈을 찾는다.
+2. app이라는 변수에 express 함수의 반환값을 저장 / REST End Point 생성
+3. Process.env는 nodejs에서 환경 변수를 가져올때 사용됨, 현재 default는 3000
+4. app.get / get 요청으로 정의 엔드포인트를 작성 
+   * 엔드포인트 생성시 파라미터는 두가지를 받는데, 첫번째 파라미터는 URL 정의, 두번째 파라미터는 해당 url에서 수행할 작업 및 응답을 정의
+   * req\(요청\)/ res\(응답\) 
+
+```javascript
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.json({
+        success: true,
+    });
+});
+
+app.listen(port, () => {
+    console.log(`server is listening at localhost:${process.env.PORT}`);
+});
+```
+
 
 
