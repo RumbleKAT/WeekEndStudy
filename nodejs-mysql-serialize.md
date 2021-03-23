@@ -236,8 +236,13 @@ Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 �
    * req\(요청\)/ res\(응답\) 
 
 ```javascript
+const mysql = require("mysql2");
 const express = require('express');
+const dbconfig = require('./config/database');
+const connection = mysql.createConnection(dbconfig);
+
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
@@ -245,6 +250,14 @@ app.get('/', (req, res) => {
         success: true,
     });
 });
+
+app.get('/users',(req,res)=>{
+    connection.query('SELECT * from users',(error, rows)=>{
+        if(error) throw error;
+        res.json(rows);
+    })
+})
+
 
 app.listen(port, () => {
     console.log(`server is listening at localhost:${process.env.PORT}`);
