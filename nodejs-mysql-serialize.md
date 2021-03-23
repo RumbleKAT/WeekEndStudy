@@ -89,9 +89,77 @@ Is this OK? (yes)
 
 ![](.gitbook/assets/2021-03-23-10.19.13%20%281%29.png)
 
+## 테스트 코드 작성 후 npm test 실행
+
+```text
+➜  mysql npm test
+
+> nodejs-mysql@1.0.0 test
+> node index.js
+
+hello world
+
+```
+
+## NodeJS와 MySQL 연동
+
+createConnection 메소드의 인자로 전달되는 객체에 자신의 데이터베이스 정보\(유저명과 패스워드 등\)을 입력해야한다. 
+
+```text
+> node index.js
+
+internal/modules/cjs/loader.js:968
+  throw err;
+  ^
+
+Error: Cannot find module 'mysql' ---> 모듈을 찾을 수 없을 경우, npm install <Module> --save 로 해당 의존성을 불러온다.
+Require stack:
+- /Users/songmyeongjin/Desktop/mysql/index.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:965:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:841:27)
+    at Module.require (internal/modules/cjs/loader.js:1025:19)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at Object.<anonymous> (/Users/songmyeongjin/Desktop/mysql/index.js:1:15)
+    at Module._compile (internal/modules/cjs/loader.js:1137:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/Users/songmyeongjin/Desktop/mysql/index.js' ]
+}
+
+```
+
+```text
+➜  mysql npm install mysql --save
+
+added 11 packages, and audited 12 packages in 2s
+
+1 moderate severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+➜  mysql npm audit fix
+
+up to date, audited 12 packages in 2s
+
+# npm audit report
+
+mysql  <=2.0.0-alpha7
+Severity: moderate
+SQL Injection - https://npmjs.com/advisories/66
+fix available via `npm audit fix`
 
 
+1 moderate severity vulnerability
 
+To address all issues, run:
+  npm audit fix
+
+```
 
 
 
