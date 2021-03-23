@@ -182,7 +182,7 @@ User info is ...
 * Koa는 태생이 ES6, Async/Await을 지원
 * Express는 community가 강 
 
-### Express
+#### Express
 
 ```javascript
 const express = require('express'); 
@@ -193,7 +193,7 @@ const server = app.listen(PORT, () => {
 });
 ```
 
-### Koa
+#### Koa
 
 ```javascript
 const koa = require('koa'); 
@@ -204,5 +204,25 @@ const server = app.listen(PORT, () => {
 });
 ```
 
-Middleware 
+### Middleware 
+
+#### Express
+
+```javascript
+app.use((req, res, next) => { 
+	console.log(`Time : ${Date.now()}`); 
+    next(); 
+});
+```
+
+#### Koa
+
+```javascript
+app.use(async (ctx, next) => { 
+	console.log(`Time: ${Date.now()}`); 
+    await next(); 
+});
+```
+
+
 
