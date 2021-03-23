@@ -112,7 +112,7 @@ internal/modules/cjs/loader.js:968
   throw err;
   ^
 
-Error: Cannot find module 'mysql' ---> 모듈을 찾을 수 없을 경우, npm install <Module> --save 로 해당 의존성을 불러온다.
+Error: Cannot find module 'mysql2' ---> 모듈을 찾을 수 없을 경우, npm install <Module> --save 로 해당 의존성을 불러온다.
 Require stack:
 - /Users/songmyeongjin/Desktop/mysql/index.js
     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:965:15)
@@ -132,36 +132,22 @@ Require stack:
 ```
 
 ```text
-➜  mysql npm install mysql --save
-
-added 11 packages, and audited 12 packages in 2s
-
-1 moderate severity vulnerability
-
-To address all issues, run:
-  npm audit fix
-
-Run `npm audit` for details.
-➜  mysql npm audit fix
-
-up to date, audited 12 packages in 2s
-
-# npm audit report
-
-mysql  <=2.0.0-alpha7
-Severity: moderate
-SQL Injection - https://npmjs.com/advisories/66
-fix available via `npm audit fix`
-
-
-1 moderate severity vulnerability
-
-To address all issues, run:
-  npm audit fix
-
+➜  mysql npm install mysql2 --save
 ```
 
+```text
+➜  mysql npm test
 
+> nodejs-mysql@1.0.0 test
+> node index.js
+
+User info is ...
+┌─────────┬────────┬──────────┐
+│ (index) │   id   │ password │
+├─────────┼────────┼──────────┤
+│    0    │ 'song' │  '1234'  │
+└─────────┴────────┴──────────┘
+```
 
 
 
