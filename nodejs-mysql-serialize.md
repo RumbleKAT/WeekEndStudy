@@ -135,7 +135,30 @@ Require stack:
 ➜  mysql npm install mysql2 --save
 ```
 
-```text
+```javascript
+const mysql = require("mysql2");
+const connection = mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    port : 3306,
+    password : 'Init123$',
+    database : 'my_db'
+});
+
+connection.connect();
+
+connection.query('select * from users',(err,rows,fields)=>{
+    if(err) throw err;
+    console.log('User info is ...');
+    console.table(rows);
+});
+
+connection.end();
+```
+
+### Mysql 연동 확인
+
+```javascript
 ➜  mysql npm test
 
 > nodejs-mysql@1.0.0 test
@@ -149,5 +172,37 @@ User info is ...
 └─────────┴────────┴──────────┘
 ```
 
+## Nodejs 웹서버
 
+### Express vs Koa
+
+* Express 만든 팀이 2016년에 Koa를 만듬
+* Express는 뼈대로 설치되는 모듈이 많고, 미들웨어를 붙일 때 꼭 Express 기반
+* Koa는 뼈대로 설치되는 모듈이 적고, 커스터마이징이 자유롭다.
+* Koa는 태생이 ES6, Async/Await을 지원
+* Express는 community가 강 
+
+### Express
+
+```javascript
+const express = require('express'); 
+const app = express(); 
+const PORT = process.env.PORT || 3000; 
+const server = app.listen(PORT, () => { 
+	console.log(`Express is listening to <http://localhost>:${PORT}); 
+});
+```
+
+### Koa
+
+```javascript
+const koa = require('koa'); 
+const app = express(); 
+const PORT = process.env.PORT || 3000; 
+const server = app.listen(PORT, () => { 
+	console.log(`Koa is listening to <http://localhost>:${PORT}); 
+});
+```
+
+Middleware 
 
