@@ -294,3 +294,39 @@ app.listen(port, () => {
 
 ![](.gitbook/assets/2021-03-23-11.03.25.png)
 
+##  POST Insert 구문 추가
+
+```javascript
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+
+app.post('/users',(req,res)=>{
+    const { id , pw } = req.body;
+    const sql = 'INSERT INTO users (id,password) VALUES(?,?)';
+
+    connection.query(sql,[id,pw],(err,rows,fields)=>{
+        if(err) return console.log(err);
+        return console.log(rows.insertId);
+    });
+
+    console.log(id, pw);
+    res.json({success: "s"});
+});
+```
+
+![](.gitbook/assets/2021-03-23-11.03.25%20%282%29.png)
+
+```javascript
+mysql> select * from users;
++---------+----------+
+| id      | password |
++---------+----------+
+| song    | 1234     |
+| song11  | 1234     |
+| song112 | 1234     |
++---------+----------+
+3 rows in set (0.00 sec)
+```
+
+
+
