@@ -297,6 +297,9 @@ app.listen(port, () => {
 ##  POST Insert 구문 추가
 
 ```javascript
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+
 app.post('/users',(req,res)=>{
     const { id , pw } = req.body;
     const sql = 'INSERT INTO users (id,password) VALUES(?,?)';
@@ -324,4 +327,6 @@ mysql> select * from users;
 +---------+----------+
 3 rows in set (0.00 sec)
 ```
+
+
 
