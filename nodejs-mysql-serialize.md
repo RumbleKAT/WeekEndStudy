@@ -328,5 +328,94 @@ mysql> select * from users;
 3 rows in set (0.00 sec)
 ```
 
+## Sequelize
+
+ORM이란 객체와 관계형 데이터베이스의 데이터를 자동으로 매핑\(연결\)해주는 것을 말한다. 객체 지향 프로그래밍은 클래스를 사용하고, 관계형 데이터베이스는 테이블을 사용한다. 즉 여기서 Sequelize는 자바스크립트 객체와 데이터베이스의 릴레이션을 매핑해주는 유용한 도구라는 의미이다! 자바스크립트 구문을 알아서 SQL문으로 변경해준다.
+
+```javascript
+$ npm i sequelize mysql2
+$ npm i -g sequelize-cli
+$ sequelize init
+```
+
+```javascript
+➜  mysql npm i sequelize --save 
+
+added 17 packages, and audited 83 packages in 3s
+
+➜  mysql npm i -g sequelize-cli
+
+added 81 packages, and audited 82 packages in 5s
+
+➜  mysql sequelize init
+
+Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
+
+Created "config/config.json"
+Successfully created models folder at "/Users/songmyeongjin/Desktop/mysql/models".
+Successfully created migrations folder at "/Users/songmyeongjin/Desktop/mysql/migrations".
+Successfully created seeders folder at "/Users/songmyeongjin/Desktop/mysql/seeders".
+```
+
+### config/config.json 
+
+DB 연결 관련 config 정보는 모두 config.json에서 관리한다. 
+
+```javascript
+{
+  "development": {
+    "username": "root",
+    "password": "Init123$",
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
+
+```
+
+### Sequelize DB Create
+
+Sequelize-cli를 이용해서 DB를 생성하고 조작할 수 있음
+
+```javascript
+➜  mysql sequelize db:create
+
+Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
+
+Loaded configuration file "config/config.json".
+Using environment "development".
+Database database_development created.
+```
+
+```javascript
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| database_development | <-- 
+| information_schema   |
+| MY_DB                |
+| mysql                |
+| performance_schema   |
+| sys                  |
++----------------------+
+6 rows in set (0.01 sec)
+```
+
 
 
