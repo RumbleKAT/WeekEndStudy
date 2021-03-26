@@ -423,7 +423,7 @@ $sequelize model:generate --name Point --attributes pid:integer,pntamt:integer,u
 
 ### model 파일과, migration 파일이 생성
 
-
+생성한 Models은 `/models` 폴더 안에 저장되고, migrations는 `/migrations` 폴더 안에 저장된다. Migrations파일 앞에 붙은 숫자는 시간에 대한 정보로 sequelize는 이를 인식해 어떤 마이그레션이 먼저이고, 어떤 순서로 생성되어야 할 지에 대해 판단한다. \(지금은 별로 중요하지 않지만, 나주엥 columns과 tables를 추가할 때 중요\)
 
 ```javascript
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
@@ -432,5 +432,18 @@ New model was created at /Users/songmyeongjin/Desktop/mysql/models/point.js .
 New migration was created at /Users/songmyeongjin/Desktop/mysql/migrations/20210326125441-create-point.js .
 ```
 
-
+```javascript
+mysql> desc points;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int          | NO   | PRI | NULL    | auto_increment |
+| pid       | int          | YES  |     | NULL    |                |
+| pntamt    | int          | YES  |     | NULL    |                |
+| userId    | varchar(255) | YES  |     | NULL    |                |
+| createdAt | datetime     | NO   |     | NULL    |                |
+| updatedAt | datetime     | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+```
 
