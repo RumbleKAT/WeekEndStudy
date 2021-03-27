@@ -173,7 +173,7 @@ connection.end();
 ### Mysql 연동 확인
 
 ```javascript
-➜  mysql npm test
+➜ $mysql npm test
 
 > nodejs-mysql@1.0.0 test
 > node index.js
@@ -335,15 +335,15 @@ $ sequelize init
 ```
 
 ```javascript
-➜  mysql npm i sequelize --save 
+➜  $mysql npm i sequelize --save 
 
 added 17 packages, and audited 83 packages in 3s
 
-➜  mysql npm i -g sequelize-cli
+➜  $mysql npm i -g sequelize-cli
 
 added 81 packages, and audited 82 packages in 5s
 
-➜  mysql sequelize init
+➜  $mysql sequelize init
 
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
 
