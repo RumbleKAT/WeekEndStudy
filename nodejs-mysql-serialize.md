@@ -146,7 +146,7 @@ Require stack:
 ```
 
 ```text
-➜  mysql npm install mysql2 --save
+➜ $mysql npm install mysql2 --save
 ```
 
 ```javascript
