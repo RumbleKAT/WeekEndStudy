@@ -389,7 +389,7 @@ DB 연결 관련 config 정보는 모두 config.json에서 관리한다.
 Sequelize-cli를 이용해서 DB를 생성하고 조작할 수 있음
 
 ```javascript
-➜  mysql sequelize db:create
+➜  $mysql sequelize db:create
 
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
 
@@ -445,5 +445,9 @@ mysql> desc points;
 | updatedAt | datetime     | NO   |     | NULL    |                |
 +-----------+--------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
+```
+
+```javascript
+$ sequelize db:migrate --env development
 ```
 
