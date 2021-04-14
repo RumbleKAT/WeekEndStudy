@@ -220,3 +220,26 @@ class CalculatorTest {
 }
 ```
 
+### 곱셈 로직 추가
+
+```java
+    public Integer calcMul(String filePath) throws IOException{
+        BufferedReaderCallback mulCallback = new BufferedReaderCallback() {
+            @Override
+            public Integer doSomethingWithReader(BufferedReader br) throws IOException {
+                Integer multiply = 1;
+                String line  = null;
+                while((line = br.readLine())!= null){
+                    multiply *= Integer.valueOf(line);
+                }
+                return multiply;
+            }
+        };
+        return fileReadTemplate(filePath,mulCallback);
+    }
+```
+
+콜백함수를 구성하는 구조는 생각보다 다른언어들과 비슷하다. ex\) JS  인터페이스 부분을 익명함수 선언을 하면서, 로직이 들어간다. 
+
+ㅋ
+
