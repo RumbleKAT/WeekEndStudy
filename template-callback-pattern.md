@@ -317,3 +317,72 @@ public Integer lineReadTemplate(String filePath, LineCallback callback, int init
 
  로우레벨의 파일 처리코드가 템플릿으로 분리되고 순수한 계산 로직만 남아 있기 때문에 코드의 관심이 무엇인지 명확해진다. Calculator 클래스와 메소드는 데이터를 가져와 계산한다는 핵심에 충실한 코드만 가지게됨
 
+## 제네릭스를 이용한 콜백 인터페이스
+
+ 지금까지 사용한 LineCallback, LineReadTemplate 는 모두 Integer 타입이다. 만약 파일을 라인 단위로 처리해서 만드는 결과 타입을 다양하게 가져가고 싶다면 제네릭을 사용하면된다. 
+
+### LineCallback
+
+```java
+package com.company;
+
+public interface LineCallback<T> {
+    T doSomethingWithLine(String line, T value);
+}
+```
+
+### LineReadTemplate
+
+```java
+   public <T> T lineReadTemplate(String filePath, LineCallback<T> callback, T initVal) throws IOException{
+        BufferedReader br = null;
+        try{
+            br = new BufferedReader(new FileReader(filePath));
+            T res = initVal;
+            String line = null;
+            while((line = br.readLine())!= null){
+                res = callback.doSomethingWithLine(line,res);
+            }
+            return res;
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }finally {
+            if(br != null){
+                try {
+                    br.close();
+                }
+                catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+```
+
+### CalcSum / CalcMul
+
+```java
+    public Integer calcSum(String filePath) throws IOException{
+       LineCallback<Integer> sumCallback = new LineCallback<Integer>() {
+           @Override
+           public Integer doSomethingWithLine(String line, Integer value) {
+               return value + Integer.valueOf(line);
+           }
+       };
+       return lineReadTemplate(filePath, sumCallback,0);
+    }
+
+    public Integer calcMul(String filePath) throws IOException{
+        LineCallback<Integer> multiplyCallback = new LineCallback<Integer>() {
+            @Override
+            public Integer doSomethingWithLine(String line, Integer value) {
+                return value * Integer.valueOf(line);
+            }
+        };
+        return lineReadTemplate(filePath, multiplyCallback,1);
+    }
+```
+
+![2 Tests Success](.gitbook/assets/2021-04-14-9.55.28.png)
+
