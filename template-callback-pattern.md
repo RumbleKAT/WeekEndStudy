@@ -260,6 +260,8 @@ public interface LineCallback {
 
  LineCallback은 파일의 각 라인과 현재까지 계산한 값을 넘겨주도록 되어있다. 그리고 새로운 계산 결과를 리턴 값을 통해 다시 전달받는다. 이 콜백을 기준으로 코드를 다시 정리해보면 템플릿에 포함되는 작업흐름은 많아지고 콜백은 단순해진다.
 
+### LineReadTemplate
+
 ```java
 public Integer lineReadTemplate(String filePath, LineCallback callback, int initVal) throws IOException{
         BufferedReader br = null;
@@ -289,5 +291,29 @@ public Integer lineReadTemplate(String filePath, LineCallback callback, int init
 
  템플릿에 파일의 각 라인을 읽는 작업이 추가되었고, 계산 결과를 담을 변수를 초기화할 값도 파라미터도 전달받게 되었다. 새로 만든 템플릿이 기존에 만들었던 템플릿들과 다른점은 while 루프 안에서 콜백을 호출한다는 점!
 
+### CalcSum / CalcMul 
 
+```java
+    public Integer calcSum(String filePath) throws IOException{
+       LineCallback sumCallback = new LineCallback() {
+           @Override
+           public Integer doSomethingWithLine(String line, Integer value) {
+               return value + Integer.valueOf(line);
+           }
+       };
+       return lineReadTemplate(filePath, sumCallback,0);
+    }
+
+    public Integer calcMul(String filePath) throws IOException{
+        LineCallback multiplyCallback = new LineCallback() {
+            @Override
+            public Integer doSomethingWithLine(String line, Integer value) {
+                return value * Integer.valueOf(line);
+            }
+        };
+        return lineReadTemplate(filePath, multiplyCallback,1);
+    }
+```
+
+ 로우레벨의 파일 처리코드가 템플릿으로 분리되고 순수한 계산 로직만 남아 있기 때문에 코드의 관심이 무엇인지 명확해진다. Calculator 클래스와 메소드는 데이터를 가져와 계산한다는 핵심에 충실한 코드만 가지게됨
 
