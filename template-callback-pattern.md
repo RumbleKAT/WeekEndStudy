@@ -241,5 +241,53 @@ class CalculatorTest {
 
 콜백함수를 구성하는 구조는 생각보다 다른언어들과 비슷하다. ex\) JS  인터페이스 부분을 익명함수 선언을 하면서, 로직이 들어간다. 
 
-ㅋ
+## 템플릿/콜백의 재설계
+
+ 앞에서 봤던 로직들은 상당히 겹치는 부분이 많이 존재한다. 먼저 결과를 저장할 변수를 초기화하고, BufferedReader를 이용해 파일의 마지막 라인까지 순차적으로 읽으면서 각 라인에서 읽은 내용을 결과를 저장할 변수의 값과 함께 계산하다가, 다 읽었으면 결과를 저장하고 있는 변수의 값을 리턴한다.
+
+ TXT 파일의 현재 줄을 처리하면 연산된 결과를 리턴하는 공통적인 구조를 가지고 있기 때문에, 아래와 같이 인터페이스를 작성한다.
+
+### LineCallback
+
+```java
+package com.company;
+
+public interface LineCallback {
+    Integer doSomethingWithLine(String line, Integer value);
+}
+
+```
+
+ LineCallback은 파일의 각 라인과 현재까지 계산한 값을 넘겨주도록 되어있다. 그리고 새로운 계산 결과를 리턴 값을 통해 다시 전달받는다. 이 콜백을 기준으로 코드를 다시 정리해보면 템플릿에 포함되는 작업흐름은 많아지고 콜백은 단순해진다.
+
+```java
+public Integer lineReadTemplate(String filePath, LineCallback callback, int initVal) throws IOException{
+        BufferedReader br = null;
+        try{
+            br = new BufferedReader(new FileReader(filePath));
+            Integer res = initVal;
+            String line = null;
+            while((line = br.readLine())!= null){
+                res = callback.doSomethingWithLine(line,res);
+            }
+            return res;
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }finally {
+            if(br != null){
+                try {
+                    br.close();
+                }
+                catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+```
+
+ 템플릿에 파일의 각 라인을 읽는 작업이 추가되었고, 계산 결과를 담을 변수를 초기화할 값도 파라미터도 전달받게 되었다. 새로 만든 템플릿이 기존에 만들었던 템플릿들과 다른점은 while 루프 안에서 콜백을 호출한다는 점!
+
+
 
