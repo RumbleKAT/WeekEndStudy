@@ -146,7 +146,7 @@ Require stack:
 ```
 
 ```text
-➜  mysql npm install mysql2 --save
+➜ $mysql npm install mysql2 --save
 ```
 
 ```javascript
@@ -173,7 +173,7 @@ connection.end();
 ### Mysql 연동 확인
 
 ```javascript
-➜  mysql npm test
+➜ $mysql npm test
 
 > nodejs-mysql@1.0.0 test
 > node index.js
@@ -335,15 +335,15 @@ $ sequelize init
 ```
 
 ```javascript
-➜  mysql npm i sequelize --save 
+➜  $mysql npm i sequelize --save 
 
 added 17 packages, and audited 83 packages in 3s
 
-➜  mysql npm i -g sequelize-cli
+➜  $mysql npm i -g sequelize-cli
 
 added 81 packages, and audited 82 packages in 5s
 
-➜  mysql sequelize init
+➜  $mysql sequelize init
 
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
 
@@ -389,7 +389,7 @@ DB 연결 관련 config 정보는 모두 config.json에서 관리한다.
 Sequelize-cli를 이용해서 DB를 생성하고 조작할 수 있음
 
 ```javascript
-➜  mysql sequelize db:create
+➜  $mysql sequelize db:create
 
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
 
@@ -445,5 +445,9 @@ mysql> desc points;
 | updatedAt | datetime     | NO   |     | NULL    |                |
 +-----------+--------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
+```
+
+```javascript
+$ sequelize db:migrate --env development
 ```
 
