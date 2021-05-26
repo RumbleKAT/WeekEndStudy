@@ -71,6 +71,10 @@ public class Application {
 
 ```java
 spring.jpa.hibernate.ddl-auto=create
+
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.show-sql=true
+
 ```
 
 ##  맵핑 어노테이션
@@ -151,8 +155,8 @@ public class MemberTeamTest {
         Team team2 = new Team("team2", "팀2");
         teamRepository.save(team2);
 
-        assertThat(teamRepository.findAll().size() == 2);
-        assertThat(entityManager.createQuery("SELECT t FROM Team as t",Team.class).getResultList().size() == 2);
+        assertThat(teamRepository.findAll().size()).isEqualTo(2);
+        assertThat(entityManager.createQuery("SELECT t FROM Team as t",Team.class).getResultList().size()).isEqualTo(2);
 
         teamRepository.findAll().forEach(System.out::println);
     }
@@ -162,5 +166,13 @@ public class MemberTeamTest {
 
 ```
 
+![](.gitbook/assets/2021-05-26-9.29.30.png)
 
+## 관계 맵핑
+
+단방향 = @OneToMany
+
+
+
+ 
 
