@@ -168,11 +168,15 @@ public class MemberTeamTest {
 
 ![](.gitbook/assets/2021-05-26-9.29.30.png)
 
-## 관계 맵핑
+## Fetch
 
-단방향 = @OneToMany
+연관 관계의 엔티티의 정보를 지금\(**Eager**\) 나중에\(**Lazy**\) 가져올지 설정  
+잘 조정해야 성능을 향상시킬 수 있음
 
-
+* `@OneToMany`의 기본값은 **Lazy**:
+  * 기본적으로 해당 **Entity**의 정보를 가져올때 **Lazy**가 적용된 `@OneToMany` 관계의 **Entity**의 정보를 가져오지는 않음
+  * 얼마나 많이 있을 지도 모르고 사용하지도 않을 값들을 다 가져오면 객체에 불필요한 정보를 로딩할 수도 있으므로
+* `@ManyToOne`의 기본값은 **Eager**: 해당 **Entity**의 정보를 가져올때 **Eager**로 설정된 `@ManyToOne` 관계의 **Entity**의 정보도 같이 가져옴
 
  
 
