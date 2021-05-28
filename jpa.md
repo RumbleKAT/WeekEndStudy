@@ -77,6 +77,27 @@ spring.jpa.show-sql=true
 
 ```
 
+## JDBC 사용시 application\_properties
+
+JPA는 hibernate가 구현체 이므로, 프로그램 시작과, 종료시 DDL을 자동으로 처리하려면, ddl-auto 옵션이 매우 중요하다. 
+
+```java
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.datasource.url=jdbc:mysql://localhost:3306/toby?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=Init123$
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+spring.jpa.database=mysql
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.use-new-id-generator-mappings= false
+
+```
+
+
+
 ##  맵핑 어노테이션
 
 * `@Id`: 데이터베이스 주키\(Primary Key\)에 맵핑
@@ -177,6 +198,30 @@ public class MemberTeamTest {
   * 기본적으로 해당 **Entity**의 정보를 가져올때 **Lazy**가 적용된 `@OneToMany` 관계의 **Entity**의 정보를 가져오지는 않음
   * 얼마나 많이 있을 지도 모르고 사용하지도 않을 값들을 다 가져오면 객체에 불필요한 정보를 로딩할 수도 있으므로
 * `@ManyToOne`의 기본값은 **Eager**: 해당 **Entity**의 정보를 가져올때 **Eager**로 설정된 `@ManyToOne` 관계의 **Entity**의 정보도 같이 가져옴
+
+## Book
+
+```java
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter @Setter
+public class Book {
+
+    @Id @GeneratedValue
+    private int id;
+    private String isbn;
+    private String title;
+
+    @ManyToOne
+    private BookStore bookStore;
+
+}
+
+```
 
  
 
