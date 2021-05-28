@@ -223,5 +223,119 @@ public class Book {
 
 ```
 
- 
+![](.gitbook/assets/2021-05-28-8.45.11.png)
+
+## Book Store
+
+```java
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Getter @Setter
+public class BookStore {
+    @Id @GeneratedValue
+    private Integer id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "bookStore")
+    private Set<Book> books = new HashSet<>();
+
+    public void add(Book book){
+        this.books.add(book);
+    }
+
+}
+
+```
+
+![](.gitbook/assets/2021-05-28-8.45.01.png)
+
+## 잘못된 예시
+
+CRUD 객체 지향적으로 생각해야된다.   [https://youtu.be/brE0tYOV9jQ](https://youtu.be/brE0tYOV9jQ)
+
+```java
+import com.rumblekat.jpastudy.domain.tram.Book;
+import com.rumblekat.jpastudy.domain.tram.BookStore;
+import com.rumblekat.jpastudy.domain.tram.BookStoreRepository;
+import com.rumblekat.jpastudy.domain.tram.BooksRepository;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class DemoJPATest {
+    @Autowired
+    BookStoreRepository bookStoreRepository;
+
+    @Autowired
+    BooksRepository booksRepository;
+
+    @Test
+    public void contextLoad(){
+        BookStore bookStore = new BookStore();
+        bookStore.setName("시애틀 책방");
+        bookStoreRepository.save(bookStore);
+
+        Book book = new Book();
+        book.setTitle("study");
+
+        bookStore.add(book);
+
+        booksRepository.save(book);
+    }
+
+}
+```
+
+![](.gitbook/assets/2021-05-28-8.40.04.png)
+
+## 정답
+
+```java
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Getter @Setter
+public class BookStore {
+    @Id @GeneratedValue
+    private Integer id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "bookStore")
+    private Set<Book> books = new HashSet<>();
+
+    public void add(Book book){
+        book.setBookStore(this); // <--- book 테이블 기준으로 외래키값을 직접 넣어줘야됨  
+        this.books.add(book);
+    }
+
+}
+
+```
+
+![](.gitbook/assets/2021-05-28-8.50.47.png)
+
+
 
