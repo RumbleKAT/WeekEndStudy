@@ -236,3 +236,5 @@ class GreetingControllerTest {
 
 ![](.gitbook/assets/2021-06-14-10.24.00.png)
 
+[https://brunch.co.kr/@purpledev/29](https://brunch.co.kr/@purpledev/29) -- 카카오 헤어샵 HATEOAS 적용 예
+
