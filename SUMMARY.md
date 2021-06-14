@@ -7,4 +7,5 @@
 * [Nodejs Mysql 과 Serialize](nodejs-mysql-serialize.md)
 * [Template Callback Pattern](template-callback-pattern.md)
 * [JPA](jpa.md)
+* [Spring HATEOAS](spring-hateoas.md)
 
