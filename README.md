@@ -8,7 +8,7 @@ description: Good Developer로 가는 공부
 2. \*\*\*\*[**Template/Callback Pattern**](template-callback-pattern.md)\*\*\*\*
 3. \*\*\*\*[**JPA**](jpa.md)\*\*\*\*
 4. \*\*\*\*[**Spring Hateoas** ](spring-hateoas.md)\*\*\*\*
-5. Dispatcher Design Pattern
+5. \*\*\*\*[**Browser Architecture**](cpu-gpu-memory-and-multi-process.md)\*\*\*\*
 
 \*\*\*\*
 
