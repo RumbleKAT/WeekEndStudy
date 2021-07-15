@@ -186,3 +186,32 @@ Connection: keep-alive
 Hello world
 ```
 
+## Docker 기본 명령어
+
+컨테이너 목록 확인하기 \(ps\)
+
+```text
+docker ps [OPTIONS] 
+```
+
+```text
+docker ps
+```
+
+```text
+CONTAINER ID        IMAGE                           COMMAND                  CREATED              STATUS              PORTS                                                    NAMES
+6a1d027b604f        teamlab/pydata-tensorflow:0.1   "/opt/start"             About a minute ago   Up About a minute   0.0.0.0:6006->6006/tcp, 22/tcp, 0.0.0.0:8888->8888/tcp   desperate_keller
+52a516f87ceb        wordpress                       "docker-entrypoint.sh"   8 minutes ago        Up 8 minutes        0.0.0.0:8080->80/tcp                                     happy_curran
+2e2c569115b9        mysql:5.7                       "docker-entrypoint.sh"   9 minutes ago        Up 9 minutes        0.0.0.0:3306->3306/tcp                                   mysql
+56341072b515        redis                           "docker-entrypoint.sh"   16 minutes ago       Up 9 minutes        0.0.0.0:1234->6379/tcp                                   furious_tesla
+
+```
+
+```text
+docker ps -a
+```
+
+-a를 붙이면 맨 처음 실행했다가 종료된 컨테이너가 추가로 보임, 즉 컨테이너는 종료되어도 삭제되지 않고 남아있다. 종료된 건은 다시 시작할 수 있고 컨테이너의 읽기/쓰기 레이어는 그대로 존재한다. 명시적으로 삭제를 하면 컨테이너가 제거된다.
+
+컨테이너 중지하
+
