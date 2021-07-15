@@ -144,3 +144,45 @@ node                            12         1934b0b038d1    5 days ago
 <your username>/node-web-app    latest     d64d3505b0d2    1 minute ago
 ```
 
+6. 이미지 실행
+
+-d로 이미지를 실행하면 분리 모드로 컨테이너를 실행해서 백그라운드에서 컨테이너가 돌아가도록한다. -p 플래그는 공개포트를 컨테이너 내의 비공개 포트로 리다이렉트한다.  
+
+```javascript
+docker run -p 49160:8080 -d <your username>/node-web-app
+```
+
+7. 로그 출력
+
+```javascript
+# 컨테이너 아이디를 확인합니다
+$ docker ps
+
+# 앱 로그를 출력합니다
+$ docker logs <container id>
+
+# 예시
+Running on http://localhost:8080
+```
+
+8. 콘솔 실행
+
+```javascript
+# 컨테이너에 들어갑니다
+$ docker exec -it <container id> /bin/bash
+```
+
+```javascript
+$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+ETag: W/"c-M6tWOb/Y57lesdjQuHeB1P/qTV0"
+Date: Mon, 13 Nov 2017 20:53:59 GMT
+Connection: keep-alive
+
+Hello world
+```
+
