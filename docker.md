@@ -52,7 +52,95 @@ description: 야매로 배우는 도커
 
 ## Node JS Docker 이미지 만들기
 
+1. package.json
+
+```javascript
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "rumblekat",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
+
+```
+
+2. express.js
+
+```javascript
+'use strict';
+
+const express = require('express');
+
+// 상수
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
+// 앱
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
+```
+
+3. Dockerfile
+
+여기서 가장먼저 해야할 것은 어떤 이미지를 사용해서 빌드할 것인지를 정의해야함. 여기서는 DockerHub에 있는 node의 LTS 버전인 12를 사용. 다음으로 이미지 안에 애플리케이션 코드를 넣기 위해 디렉토리 생성. 이 이미지에는 Node.js와 NPM이 설치되어 있으므로 npm 바이너리로 앱의 의존성을 설치하면됨\(버전 4이하의 npm는 package-lock.json을 생성하지 않는다.\) 작업 디렉터리 전체가 아닌 package.json 파일만을 복사하는데 이는 캐시된 Docker 레이어의 장점을 활용하기 위함 \(npm install를 하기 위해\) 
+
+Docker 이미지 안에 앱의 소스코드를 넣기 위해 COPY 지시어를 사용하고, 앱이 8080포트에 바인드 되어 있으므로, EXPOSE지시어를 사용하여 docker 데몬에 매핑한다. 
+
+```javascript
+FROM node:12
+# 앱 디렉토리 생성
+WORKDIR /usr/src/app
+#앱 의존성 설치
+#package-json / pacakge-lock.json의 의존성 설치를 위해 와일드 카드 사용
+COPY package*.json ./
+
+RUN npm install
+# 프로덕션을 위한 코드를 빌드하는 경우
+# RUN npm ci --only=production
+
+# 앱 소스 추가
+COPY . .
+
+EXPOSE 8080
+CMD ["node", "server.js"]
 
 
+```
 
+4. .dockerignore
+
+```javascript
+node_modules
+npm-debug.log
+
+#Docker 이미지에 로컬 모듈과 디버깅 로그를 복사를 막음#
+```
+
+5.이미지 빌드
+
+```javascript
+docker build . -t <your username>/node-web-app
+```
+
+```javascript
+$ docker images
+
+# 예시
+REPOSITORY                      TAG        ID              CREATED
+node                            12         1934b0b038d1    5 days ago
+<your username>/node-web-app    latest     d64d3505b0d2    1 minute ago
+```
 
