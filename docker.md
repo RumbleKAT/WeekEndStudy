@@ -188,7 +188,7 @@ Hello world
 
 ## Docker 기본 명령어
 
-컨테이너 목록 확인하기 \(ps\)
+### 컨테이너 목록 확인하기 \(ps\)
 
 ```text
 docker ps [OPTIONS] 
@@ -213,5 +213,159 @@ docker ps -a
 
 -a를 붙이면 맨 처음 실행했다가 종료된 컨테이너가 추가로 보임, 즉 컨테이너는 종료되어도 삭제되지 않고 남아있다. 종료된 건은 다시 시작할 수 있고 컨테이너의 읽기/쓰기 레이어는 그대로 존재한다. 명시적으로 삭제를 하면 컨테이너가 제거된다.
 
-컨테이너 중지하
+### 컨테이너 중지하기
+
+```text
+docker stop [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+도커 ID의 전체 길이는 64자리이다. 하지만 명령어의 인자를 전달할 때는 전부 입력하지 않아도 된다. 앞부분이 겹치지 않을 만큼만 적어도 무관 
+
+### 컨테이너 제거하기 
+
+```text
+docker rm [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+`docker rm -v $(docker ps -a -q -f status=exited)` 명령어를 입력하면 중지된 컨테이너 ID를 가져와서 한번에 삭제
+
+### 이미지 목록 확인하기 \(images\)
+
+```text
+docker images [OPTIONS] [REPOSITORY[:TAG]]
+```
+
+### 이미지 다운로드하기 \(pull\)
+
+```text
+docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+```
+
+```text
+docker pull ubuntu:14.04
+```
+
+### 이미지 삭제하기 \(rmi\)
+
+```text
+docker rmi [OPTIONS] IMAGE [IMAGE...]
+```
+
+이미지는 여러개의 레이어로 구성되어서 삭제시 모든 레이어가 삭제
+
+### 컨테이너 로그 보기 \(logs\)
+
+```text
+docker logs [OPTIONS] CONTAINER
+```
+
+기본적으로 -f --tail옵션을 사용한다. 
+
+```text
+docker logs --tail 10 ${WORDPRESS_CONTAINER_ID} // 마지막 10줄만 출력
+```
+
+```text
+docker logs -f ${WORDPRESS_CONTAINER_ID} // 실시간 로그 출
+```
+
+### 컨테이너 명령어 실행하기 \(exec\)
+
+```text
+docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+```
+
+run 명령어는 새로 컨테이너를 만들어 실행, exec는 실행중인 컨테이너에 명령어를 내린다.
+
+```text
+docker exec -it mysql /bin/bash
+
+# MySQL test
+$ mysql -uroot
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| wp                 |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> quit
+exit
+```
+
+## 컨테이너 업데이트
+
+도커에서 컨테이너를 업데이트 하려면 새 버전의 이미지를 받고 기존 컨테이너를 삭제한 후 새 이미지를 기반으로 새 컨테이너를 실행한다. 컨테이너 삭제시 유지해야 하는 데이터는 반드시 컨테이너 내부가 아닌 외부 스토리지에 저장해야함 AWS S3를 사용하거나, Data Volume을 컨테이너에 추가해야함. 데이터 볼륨을 사용하면 컨테이너를 삭제해도 지워지지 않는다. 
+
+데이터볼 볼륨 만들기 -v 옵션
+
+```text
+# before
+docker run -d -p 3306:3306 \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  --name mysql \
+  mysql:5.7
+
+# after
+docker run -d -p 3306:3306 \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  --name mysql \
+  -v /my/own/datadir:/var/lib/mysql \ # <- volume mount
+  mysql:5.7
+```
+
+위 샘플은 호스트의 `/my/own/datadir`디렉토리를 컨테이너의 `/var/lib/mysql`디렉토리로 마운트. 이제 데이터베이스 파일은 호스트의 `/my/own/datadir`디렉토리에 저장되고 컨테이너를 삭제해도 데이터는 사라지지 않는다. 최신버전의 MySQL 이미지를 다운받고 다시 컨테이너를 실행할 때 동일한 디렉토리를 마운트 한다면 그대로 데이터를 사용할 수 있다.
+
+## Docker Compose
+
+지금까진 간단한 작업만 했기에 명령이 길지 않지만, 복잡한 경우 어려움. 도커는 복잡한 설정을 쉽게 관리하기 위해 YAML 방식의 설정파일을 이용한 Docker Compose 툴을 사용한다.
+
+```text
+curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+# test
+docker-compose version
+```
+
+```text
+version: '2'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: wordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     volumes:
+       - wp_data:/var/www/html
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+    db_data:
+    wp_data:
+```
+
+```text
+docker-compose up
+```
 
