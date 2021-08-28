@@ -10,5 +10,5 @@
 * [Spring HATEOAS](spring-hateoas.md)
 * [CPU, GPU, Memory and Multi process](cpu-gpu-memory-and-multi-process.md)
 * [Docker](docker.md)
-* [1장 아마존 비즈니스 민첩성의 비밀](1.md)
+* [도메인 주도 설계로 시작하는 마이크로서비스 개발](1.md)
 
