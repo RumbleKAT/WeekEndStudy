@@ -6,7 +6,7 @@ MySQL은 세계에서 가장 많이 쓰이는 오픈 소스의 관계형 데이�
 
 ## MySQL Setting
 
-```text
+```
 mysql> CREATE DATABASE  MY_DB;
 Query OK, 1 row affected (0.01 sec)
 
@@ -35,23 +35,23 @@ mysql> select * from users;
 
 Nodejs 는 이벤트 기반의 플랫폼. 노드에서 일어나는 모든 일은 어떤 이벤트에 대한 반응. 모두 일련의 콜백이다. libuv라는 추상화된 라이브러리가 이벤트 루프 기능을 제공. 자바스크립트를 실행하는 스레드는 단 하나, 이 스레드가 바로 이벤트 루프가 실행되는 스레드. 
 
-### 모든 CPU 활용 <a id="&#xBAA8;&#xB4E0;-CPU-&#xD65C;&#xC6A9;"></a>
+### 모든 CPU 활용 <a href="cpu" id="cpu"></a>
 
 Node.js 어플리케이션은 싱글 스레드로 작동합니다. 멀티코어 환경에서 1개의 Node.js 어플리케이션은 효율적으로 작동하지 않습니다. 낭비되는 CPU가 있기 때문입니다. [Cluster Module](https://nodejs.org/api/cluster.html)을 사용하면, CPU 마다 child 프로세스를 쉽게 만들 수 있습니다. 각각의 child 프로세스는 각자 자신만의 이벤트루프가 존재하고 master 프로세스는 모든 자식들에게 요청을 분산시켜 줍니다.
 
-### 스레드 풀 조정 <a id="&#xC2A4;&#xB808;&#xB4DC;-&#xD480;-&#xC870;&#xC815;"></a>
+### 스레드 풀 조정 <a href="undefined" id="undefined"></a>
 
 앞서 언급했듯이, libuv는 스레드 4개로 스레드 풀을 생성합니다. 스레드 풀의 기본 크기는 `UV_THREADPOOL_SIZE` 환경변수를 설정해서 수정할 수 있습니다. 이 방법은 I/O 작업이 많은 어플리케이션에서 도움이 될 수 있겠지만, 큰 스레드 풀은 메모리나 CPU를 고갈시킬 수 있음을 기억해야 합니다.
 
-### 작업을 다른서비스에 맡기기 <a id="&#xC791;&#xC5C5;&#xC744;-&#xB2E4;&#xB978;&#xC11C;&#xBE44;&#xC2A4;&#xC5D0;-&#xB9E1;&#xAE30;&#xAE30;"></a>
+### 작업을 다른서비스에 맡기기 <a href="undefined" id="undefined"></a>
 
 만약 Node.js가 CPU사용이 과도하게 필요한 작업에서 사용된다면, 이 특정 작업에 더 잘맞는 다른 언어를 선택해서 그 쪽으로 처리를 옮겨 작업량을 줄이는 것이 가능한 방법일 수 있습니다.
 
-`package.json`은 프로젝트 정보와 의존성\(dependencies\)을 관리하는 문서  
-이미 작성된 `package.json` 문서는 어느 곳에서도 동일한 개발 환경을 구축할 수 있게 해준다.  
+`package.json`은 프로젝트 정보와 의존성(dependencies)을 관리하는 문서\
+이미 작성된 `package.json` 문서는 어느 곳에서도 동일한 개발 환경을 구축할 수 있게 해준다.\
 JSON 포맷으로 작성해야 하며, 다음과 같은 옵션들이 추가될 수 있습니다.
 
-```text
+```
 $ npm init
 ```
 
@@ -65,11 +65,11 @@ $ npm init
 * author
 * license
 
-```text
+```
 $ npm init -y
 ```
 
-```text
+```
 ➜  mysql npm init
 
 Press ^C at any time to quit.
@@ -101,11 +101,11 @@ Is this OK? (yes)
 
 ```
 
-![](.gitbook/assets/2021-03-23-10.19.13%20%281%29.png)
+![](<.gitbook/assets/스크린샷 2021-03-23 오후 10.19.13 (1).png>)
 
 ## 테스트 코드 작성 후 npm test 실행
 
-```text
+```
 ➜  mysql npm test
 
 > nodejs-mysql@1.0.0 test
@@ -117,9 +117,9 @@ hello world
 
 ## NodeJS와 MySQL 연동
 
-createConnection 메소드의 인자로 전달되는 객체에 자신의 데이터베이스 정보\(유저명과 패스워드 등\)을 입력해야한다. 
+createConnection 메소드의 인자로 전달되는 객체에 자신의 데이터베이스 정보(유저명과 패스워드 등)을 입력해야한다. 
 
-```text
+```
 > node index.js
 
 internal/modules/cjs/loader.js:968
@@ -145,7 +145,7 @@ Require stack:
 
 ```
 
-```text
+```
 ➜ $mysql npm install mysql2 --save
 ```
 
@@ -242,12 +242,12 @@ app.use(async (ctx, next) => {
 
 Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 기능을 제공하는 간결하고 유연한 Node.js 웹 애플리케이션 프레임워크. 
 
-1. require는 nodeJS에서 다른 패키지를 불러올 때 사용되는 키워드. NODE\_PATH 환경 변수에 설정한 위치에서 express라는 모듈을 찾는다.
+1. require는 nodeJS에서 다른 패키지를 불러올 때 사용되는 키워드. NODE_PATH 환경 변수에 설정한 위치에서 express라는 모듈을 찾는다.
 2. app이라는 변수에 express 함수의 반환값을 저장 / REST End Point 생성
 3. Process.env는 nodejs에서 환경 변수를 가져올때 사용됨, 현재 default는 3000
 4. app.get / get 요청으로 정의 엔드포인트를 작성 
    * 엔드포인트 생성시 파라미터는 두가지를 받는데, 첫번째 파라미터는 URL 정의, 두번째 파라미터는 해당 url에서 수행할 작업 및 응답을 정의
-   * req\(요청\)/ res\(응답\) 
+   * req(요청)/ res(응답) 
 
 ```javascript
 module.exports = {
@@ -288,7 +288,7 @@ app.listen(port, () => {
 });
 ```
 
-![](.gitbook/assets/2021-03-23-11.03.25.png)
+![](<.gitbook/assets/스크린샷 2021-03-23 오후 11.03.25.png>)
 
 ##  POST Insert 구문 추가
 
@@ -310,7 +310,7 @@ app.post('/users',(req,res)=>{
 });
 ```
 
-![](.gitbook/assets/2021-03-23-11.03.25%20%282%29.png)
+![](<.gitbook/assets/스크린샷 2021-03-23 오후 11.03.25 (2).png>)
 
 ```javascript
 mysql> select * from users;
@@ -326,7 +326,7 @@ mysql> select * from users;
 
 ## Sequelize
 
-ORM이란 객체와 관계형 데이터베이스의 데이터를 자동으로 매핑\(연결\)해주는 것을 말한다. 객체 지향 프로그래밍은 클래스를 사용하고, 관계형 데이터베이스는 테이블을 사용한다. 즉 여기서 Sequelize는 자바스크립트 객체와 데이터베이스의 릴레이션을 매핑해주는 유용한 도구라는 의미이다! 자바스크립트 구문을 알아서 SQL문으로 변경해준다.
+ORM이란 객체와 관계형 데이터베이스의 데이터를 자동으로 매핑(연결)해주는 것을 말한다. 객체 지향 프로그래밍은 클래스를 사용하고, 관계형 데이터베이스는 테이블을 사용한다. 즉 여기서 Sequelize는 자바스크립트 객체와 데이터베이스의 릴레이션을 매핑해주는 유용한 도구라는 의미이다! 자바스크립트 구문을 알아서 SQL문으로 변경해준다.
 
 ```javascript
 $ npm i sequelize mysql2
@@ -415,7 +415,7 @@ mysql> show databases;
 
 ### Table 생성
 
-Sequelize를 이용하여 DDL을 아래와 같이 작성할수 있다. \(주의해야할 점은, --attribute뒤에 컬럼을 콤마로 구분한다.띄어쓰기없이\)
+Sequelize를 이용하여 DDL을 아래와 같이 작성할수 있다. (주의해야할 점은, --attribute뒤에 컬럼을 콤마로 구분한다.띄어쓰기없이)
 
 ```javascript
 $sequelize model:generate --name Point --attributes pid:integer,pntamt:integer,userId:string  
@@ -423,7 +423,7 @@ $sequelize model:generate --name Point --attributes pid:integer,pntamt:integer,u
 
 ### model 파일과, migration 파일이 생성
 
-생성한 Models은 `/models` 폴더 안에 저장되고, migrations는 `/migrations` 폴더 안에 저장된다. Migrations파일 앞에 붙은 숫자는 시간에 대한 정보로 sequelize는 이를 인식해 어떤 마이그레션이 먼저이고, 어떤 순서로 생성되어야 할 지에 대해 판단한다. \(지금은 별로 중요하지 않지만, 나주엥 columns과 tables를 추가할 때 중요\)
+생성한 Models은 `/models` 폴더 안에 저장되고, migrations는 `/migrations` 폴더 안에 저장된다. Migrations파일 앞에 붙은 숫자는 시간에 대한 정보로 sequelize는 이를 인식해 어떤 마이그레션이 먼저이고, 어떤 순서로 생성되어야 할 지에 대해 판단한다. (지금은 별로 중요하지 않지만, 나주엥 columns과 tables를 추가할 때 중요)
 
 ```javascript
 Sequelize CLI [Node: 12.18.3, CLI: 6.2.0, ORM: 6.6.2]
@@ -450,4 +450,3 @@ mysql> desc points;
 ```javascript
 $ sequelize db:migrate --env development
 ```
-

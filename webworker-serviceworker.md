@@ -12,9 +12,7 @@ description: 2021.03.27 스터디 내용
 
 1. 워커에서 DOM을 직접 조작할 수 없고, Window의 일부 메서드와 속성은 사용 불가. 그러나 [웹소캣](websocket.md) [IndexedDB](indexeddb.md) 를 포함한 많은 수의 항목도 사용 가능
 
-![WebWorker&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xAC00;&#xB2A5;&#xD55C; &#xD568;&#xC218;](.gitbook/assets/2021-03-22-11.09.36.png)
-
-
+![WebWorker에서 사용가능한 함수](<.gitbook/assets/스크린샷 2021-03-22 오후 11.09.36.png>)
 
 
 
