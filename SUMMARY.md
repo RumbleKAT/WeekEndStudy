@@ -13,3 +13,4 @@
 * [도메인 주도 설계로 시작하는 마이크로서비스 개발](1.md)
 * [Reconcilation](reconcilation.md)
 * [Kotlin](kotlin.md)
+* [Kotlin Study 2](kotlin-study-2.md)

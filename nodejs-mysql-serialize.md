@@ -31,9 +31,9 @@ mysql> select * from users;
 1 row in set (0.00 sec)
 ```
 
-## Node JS 
+## Node JS&#x20;
 
-Nodejs 는 이벤트 기반의 플랫폼. 노드에서 일어나는 모든 일은 어떤 이벤트에 대한 반응. 모두 일련의 콜백이다. libuv라는 추상화된 라이브러리가 이벤트 루프 기능을 제공. 자바스크립트를 실행하는 스레드는 단 하나, 이 스레드가 바로 이벤트 루프가 실행되는 스레드. 
+Nodejs 는 이벤트 기반의 플랫폼. 노드에서 일어나는 모든 일은 어떤 이벤트에 대한 반응. 모두 일련의 콜백이다. libuv라는 추상화된 라이브러리가 이벤트 루프 기능을 제공. 자바스크립트를 실행하는 스레드는 단 하나, 이 스레드가 바로 이벤트 루프가 실행되는 스레드.&#x20;
 
 ### 모든 CPU 활용 <a href="cpu" id="cpu"></a>
 
@@ -117,7 +117,7 @@ hello world
 
 ## NodeJS와 MySQL 연동
 
-createConnection 메소드의 인자로 전달되는 객체에 자신의 데이터베이스 정보(유저명과 패스워드 등)을 입력해야한다. 
+createConnection 메소드의 인자로 전달되는 객체에 자신의 데이터베이스 정보(유저명과 패스워드 등)을 입력해야한다.&#x20;
 
 ```
 > node index.js
@@ -194,7 +194,7 @@ User info is ...
 * Express는 뼈대로 설치되는 모듈이 많고, 미들웨어를 붙일 때 꼭 Express 기반
 * Koa는 뼈대로 설치되는 모듈이 적고, 커스터마이징이 자유롭다.
 * Koa는 태생이 ES6, Async/Await을 지원
-* Express는 community가 강 
+* Express는 community가 강&#x20;
 
 #### Express
 
@@ -218,7 +218,7 @@ const server = app.listen(PORT, () => {
 });
 ```
 
-### Middleware 
+### Middleware&#x20;
 
 #### Express
 
@@ -240,14 +240,14 @@ app.use(async (ctx, next) => {
 
 ## Express
 
-Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 기능을 제공하는 간결하고 유연한 Node.js 웹 애플리케이션 프레임워크. 
+Express는 웹 및 모바일 애플리케이션을 위한 일련의 강력한 기능을 제공하는 간결하고 유연한 Node.js 웹 애플리케이션 프레임워크.&#x20;
 
-1. require는 nodeJS에서 다른 패키지를 불러올 때 사용되는 키워드. NODE_PATH 환경 변수에 설정한 위치에서 express라는 모듈을 찾는다.
+1. require는 nodeJS에서 다른 패키지를 불러올 때 사용되는 키워드. NODE\_PATH 환경 변수에 설정한 위치에서 express라는 모듈을 찾는다.
 2. app이라는 변수에 express 함수의 반환값을 저장 / REST End Point 생성
 3. Process.env는 nodejs에서 환경 변수를 가져올때 사용됨, 현재 default는 3000
-4. app.get / get 요청으로 정의 엔드포인트를 작성 
+4. app.get / get 요청으로 정의 엔드포인트를 작성&#x20;
    * 엔드포인트 생성시 파라미터는 두가지를 받는데, 첫번째 파라미터는 URL 정의, 두번째 파라미터는 해당 url에서 수행할 작업 및 응답을 정의
-   * req(요청)/ res(응답) 
+   * req(요청)/ res(응답)&#x20;
 
 ```javascript
 module.exports = {
@@ -290,7 +290,9 @@ app.listen(port, () => {
 
 ![](<.gitbook/assets/스크린샷 2021-03-23 오후 11.03.25.png>)
 
-##  POST Insert 구문 추가
+\
+POST Insert 구문 추가
+-----------------
 
 ```javascript
 const bodyParser = require('body-parser')
@@ -353,9 +355,9 @@ Successfully created migrations folder at "/Users/songmyeongjin/Desktop/mysql/mi
 Successfully created seeders folder at "/Users/songmyeongjin/Desktop/mysql/seeders".
 ```
 
-### config/config.json 
+### config/config.json&#x20;
 
-DB 연결 관련 config 정보는 모두 config.json에서 관리한다. 
+DB 연결 관련 config 정보는 모두 config.json에서 관리한다.&#x20;
 
 ```javascript
 {
