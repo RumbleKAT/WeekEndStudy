@@ -12,6 +12,7 @@ description: Good Developer로 가는 공부
 6. ****[**Docker**](docker.md)****
 7. ****[**도메인 주도 설계로 시작하는 마이크로서비스 개**](1.md)****
 8. [**Reconciliation**](reconcilation.md)****
-9. Kotlin
+9. ****[**Kotlin**](kotlin.md#kotlin)****
+10. ****[**Kotlin 2**](kotlin-study-2.md)****
 
 ****
